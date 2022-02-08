@@ -7,4 +7,5 @@ void encryptProgram(int,int);
 string funcLeer(string);
 string text2bin(string);
 string strInverter(string);
-string codecRules(string);
+string notStr(string);
+string codecRules(string particion, string aux);
