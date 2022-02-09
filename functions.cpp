@@ -22,7 +22,7 @@ string funcLeer(string nombre){
     return texto;
 }
 
-void funcEscribir(string nombre, string texto)
+void funcEscribir(string nombre, string texto)//Funcion que escribe "texto", en un archivo con "nombre"
 {
     ofstream archivoEscritura;
 
@@ -77,25 +77,26 @@ string notStr(string particion){//invierte los bits de una cadena string
     return codificado;
 }
 
-string codecRules(string particion, string aux){//Esta funcion aplica las 3 reglas de codificiacion basandose en el numero de 0s y 1s de la particion anterior (aux)
+string codecMethod1(string particion, string aux){//Esta funcion aplica las 3 reglas del metodo 1, basandose en el numero de 0s y 1s de la particion anterior (aux)
     string codificado;
     unsigned int count=0;
-    for (unsigned long int i=0;i<aux.size();i++) {
+
+    for (unsigned long int i=0;i<aux.size();i++) {//Conteo de 0s y 1s de la particion anterior
         if(aux[i]=='1') count++;
     }
-    if (count == aux.size()/2){     //Caso 1 '0s'=='1s'
+
+    if (count == aux.size()/2 && aux.size()%2 == 0){//Caso 1 '0s'=='1s' (restriccion de impares)
         cout<<" caso 1"<<endl;//CONTROL
         for (unsigned long int i=0;i<particion.size();i++) {
             if(particion[i]=='0') codificado += '1'; //se invierte el bit
             else codificado += '0';
-
         }
     }
 
-    else if(count < aux.size()/2){  //Caso 2 '0s'>'1s'
+    else if(count < aux.size()/2){//Caso 2 '0s'>'1s'
         cout<<" caso 2"<<endl;//CONTROL
         for (unsigned long int i=0,k=0;i<particion.size();i++) {
-            if(2*(k+1)-1==i){       //si es multiplo par (considerando que se indexa desde cero)
+            if(2*(k+1)-1==i){       //si es multiplo de 2 (considerando que se indexa desde cero)
                 if(particion[i]=='0') codificado += '1'; //se invierte el bit
                 else codificado += '0';
                 k++;
@@ -103,10 +104,10 @@ string codecRules(string particion, string aux){//Esta funcion aplica las 3 regl
             else codificado += particion[i];//sino se pasa igual
         }
     }
-    else{                           //Caso 3 '0s'<'1s'
+    else{//Caso 3 '0s'<'1s'
         cout<<" caso 3"<<endl;//CONTROL
         for (unsigned long int i=0,k=0;i<particion.size();i++) {
-            if(3*(k+1)-1==i){       //si es multiplo par (considerando que se indexa desde cero)
+            if(3*(k+1)-1==i){       //si es multiplo de 3 (considerando que se indexa desde cero)
                 if(particion[i]=='0') codificado += '1'; //se invierte el bit
                 else codificado += '0';
                 k++;
@@ -119,4 +120,12 @@ string codecRules(string particion, string aux){//Esta funcion aplica las 3 regl
     return codificado;
 }
 
-
+string codecMethod2(string particion)
+{   string codificado;
+    codificado += particion[particion.size()-1];
+    for (unsigned long int i=0;i<particion.size()-1;i++) {
+        codificado += particion[i];
+    }
+    cout<<" codificado: "<<codificado<<endl; //CONTROL
+    return codificado;
+}
