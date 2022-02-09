@@ -7,7 +7,7 @@ string funcLeer(string nombre){
     archivoLectura.open(nombre); //Abrir el archivo en modo lectura
 
     if(archivoLectura.fail()){//Hay error al abrir el archivo
-        cout<<"No se pudo abrir el archivo"<<endl;
+        cout<<"No se pudo abrir el archivo. Error de Lectura."<<endl;
         exit(-1); //Finalizar la ejecucion del programa
     }
 
@@ -20,6 +20,21 @@ string funcLeer(string nombre){
     //binario += text2bin(texto);//funcion que convierte el texto a binario
     archivoLectura.close();
     return texto;
+}
+
+void funcEscribir(string nombre, string texto)
+{
+    ofstream archivoEscritura;
+
+    archivoEscritura.open(nombre); //Abrir el archivo en modo lectura
+
+    if(archivoEscritura.fail()){//Hay error al abrir el archivo
+        cout<<"No se pudo abrir el archivo. Error de escritura."<<endl;
+        exit(-1); //Finalizar la ejecucion del programa
+    }
+
+    archivoEscritura<<texto;
+    archivoEscritura.close();
 }
 
 string text2bin(string texto){//convierte el texto a binario
@@ -62,22 +77,46 @@ string notStr(string particion){//invierte los bits de una cadena string
     return codificado;
 }
 
-string codecRules(string particion, string aux){
+string codecRules(string particion, string aux){//Esta funcion aplica las 3 reglas de codificiacion basandose en el numero de 0s y 1s de la particion anterior (aux)
     string codificado;
     unsigned int count=0;
     for (unsigned long int i=0;i<aux.size();i++) {
         if(aux[i]=='1') count++;
     }
-    if (count == aux.size()/2){
-        cout<<" caso 1"<<endl;
-    }
-    else if(count < aux.size()/2){
-        cout<<" caso 2"<<endl;
-    }
-    else{
-        cout<<" caso 3"<<endl;
+    if (count == aux.size()/2){     //Caso 1 '0s'=='1s'
+        cout<<" caso 1"<<endl;//CONTROL
+        for (unsigned long int i=0;i<particion.size();i++) {
+            if(particion[i]=='0') codificado += '1'; //se invierte el bit
+            else codificado += '0';
+
+        }
     }
 
+    else if(count < aux.size()/2){  //Caso 2 '0s'>'1s'
+        cout<<" caso 2"<<endl;//CONTROL
+        for (unsigned long int i=0,k=0;i<particion.size();i++) {
+            if(2*(k+1)-1==i){       //si es multiplo par (considerando que se indexa desde cero)
+                if(particion[i]=='0') codificado += '1'; //se invierte el bit
+                else codificado += '0';
+                k++;
+            }
+            else codificado += particion[i];//sino se pasa igual
+        }
+    }
+    else{                           //Caso 3 '0s'<'1s'
+        cout<<" caso 3"<<endl;//CONTROL
+        for (unsigned long int i=0,k=0;i<particion.size();i++) {
+            if(3*(k+1)-1==i){       //si es multiplo par (considerando que se indexa desde cero)
+                if(particion[i]=='0') codificado += '1'; //se invierte el bit
+                else codificado += '0';
+                k++;
+            }
+            else codificado += particion[i];//sino se pasa igual
+        }
+    }
 
+    cout<<" codificado: "<<codificado<<endl; //CONTROL
     return codificado;
 }
+
+
