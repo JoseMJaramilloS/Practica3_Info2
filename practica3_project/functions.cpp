@@ -120,12 +120,75 @@ string codecMethod1(string particion, string aux){//Esta funcion aplica las 3 re
     return codificado;
 }
 
-string codecMethod2(string particion)
+string codecMethod2(string particion)//Segundo metodo de codificacion
 {   string codificado;
-    codificado += particion[particion.size()-1];
-    for (unsigned long int i=0;i<particion.size()-1;i++) {
+
+    codificado += particion[particion.size()-1];//Guardo el ultimo bit del arreglo original
+    for (unsigned long int i=0;i<particion.size()-1;i++) {//Guardo a partir de ahí en orden
         codificado += particion[i];
     }
     cout<<" codificado: "<<codificado<<endl; //CONTROL
     return codificado;
+}
+
+string decodecMethod2(string particion)//Segundo metodo de DEcodificacion
+{   string codificado;
+
+    for (unsigned long int i=1;i<particion.size();i++) {//Guardo a partir del segundo bit en orden
+        codificado += particion[i];
+    }
+    codificado += particion[0];//Guardo el primer bit del arreglo original
+    cout<<" codificado: "<<codificado<<endl; //CONTROL
+    return codificado;
+}
+
+
+void strComparate(string texto1, string texto2)//Compara dos cadenas de strings
+{
+    if(texto1.size()==texto2.size()){
+        for (unsigned long int i=0;i<texto1.size();i++) {
+            if(texto1[i]!=texto2[i]) {
+                cout<<"Las cadenas no coinciden"<<endl;
+                break;
+            }
+        }
+        cout<<"Las cadenas cocinciden"<<endl;
+    }
+    else cout<<"Las cadenas no coinciden"<<endl;
+
+}
+
+string bin2text(string binario)//convierte binario a texto
+{
+    string texto,eightBits;
+    int num=0;
+    for (unsigned long int i=0,k=0;i<binario.size();i++) {
+        eightBits += binario[i];
+        if(8*(k+1)-1==i){       //Particiones de 8 bits
+            cout<<eightBits<<endl;//CONTROL
+
+            for (int i=7;i>=0;i--) {//Recorre los 8 bits para convertirlo a decimal y luego a caracter
+                if(eightBits[i]=='1'){
+                    num += potencia(2,7-i);
+                }
+            }
+            cout<<num<<": "<<char(num)<<endl; //CONTROL
+            texto += char(num);
+            num=0;
+            eightBits.clear();
+            k++;
+        }
+
+    }
+    cout<<texto<<endl; //CONTROL
+    return texto;
+}
+
+int potencia(int base, int exp)//realiza la operacion de potencia base^exp
+{
+    int result=1;
+    for (int i=1;i<=exp;i++) {
+        result *=base;
+    }
+    return result;
 }

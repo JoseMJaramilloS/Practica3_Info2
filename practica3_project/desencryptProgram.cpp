@@ -1,13 +1,7 @@
 #include "functions.h"
 
-string binario;
-
-string encryptProgram(unsigned int seed,int method, string texto){
-    string codificado, particion, aux;
-
-    binario += text2bin(texto);//FUNCION que convierte el texto a binario
-    cout<<"Longitud de binario: "<<binario.size()<<endl;//CONTROL
-
+string desencryptProgram(unsigned int seed,int method, string binario){
+    string decodificado, texto, particion,aux;
     switch (method) {
 
     case 1:{
@@ -18,11 +12,11 @@ string encryptProgram(unsigned int seed,int method, string texto){
 
                 if(i<seed) {//n=seed
                     aux=particion;
-                    codificado+=notStr(particion);//FUNCION que niega el primer termino
-                    cout<<" codificado0: "<<codificado<<endl;//CONTROL
+                    decodificado+=notStr(particion);//FUNCION que niega el primer termino
+                    cout<<" decodificado0: "<<decodificado<<endl;//CONTROL
                 }
                 else{
-                    codificado+=codecMethod1(particion,aux);//FUNCION que aplica reglas de codificacion
+                    decodificado+=codecMethod1(particion,aux);//FUNCION que aplica reglas de codificacion1
                     aux=particion;
                 }
                 cout<<endl;//CONTROL
@@ -31,8 +25,8 @@ string encryptProgram(unsigned int seed,int method, string texto){
             }
 
         }
-        cout<<"Codificion FINAL: "<<codificado<<endl;//CONTROL
-        cout<<"Longitud: "<<codificado.size()<<endl;//CONTROL
+        cout<<"Decodificion FINAL: "<<decodificado<<endl;//CONTROL
+        cout<<"Longitud: "<<decodificado.size()<<endl;//CONTROL
         break;
     }
 
@@ -41,17 +35,21 @@ string encryptProgram(unsigned int seed,int method, string texto){
             particion += binario[i];
             if(seed*(k+1)-1==i){
                 cout<<particion<<endl;//CONTROL
-                codificado+=codecMethod2(particion);
+                decodificado+=decodecMethod2(particion);//FUNCION que aplica reglas de DEcodificacion2
                 particion.clear(); //Se borra la particion
                 k++;
             }
 
         }
-        cout<<"Codificion FINAL: "<<codificado<<endl;//CONTROL
-        cout<<"Longitud: "<<codificado.size()<<endl;//CONTROL
+        cout<<"Decodificion FINAL: "<<decodificado<<endl;//CONTROL
+        cout<<"Longitud: "<<decodificado.size()<<endl;//CONTROL
         break;
     }
 
     }
-    return codificado;
+
+    texto =bin2text(decodificado);
+
+    return texto;
 }
+
