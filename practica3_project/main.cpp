@@ -6,22 +6,22 @@ using namespace std;
 
 int main()
 {
-    string texto,codificado,codificado2,text_decodificado;
-    int seed=4, method=2;
+    string texto_original,codificado,codificado2,text_decodificado;
+    int seed=5, method=1;
 
     //CODIFICACION
-    texto= funcLeer("prueba3.txt"); //FUNCION para leer ----- Nombre del archivo
-    cout<<texto<<endl;
-    codificado=encryptProgram(seed,method,texto);
-    funcEscribir("codificado_prueba3.txt",codificado);
+    texto_original= funcLeer("prueba2.txt"); //FUNCION para LEER
+    cout<<texto_original<<endl;
+    codificado=encryptProgram(seed,method,texto_original);
+    funcEscribir("codificado_prueba2.txt",codificado);
 
     //DECODIFICACION
-    codificado2=funcLeer("codificado_prueba3.txt");
+    codificado2=funcLeer("codificado_prueba2.txt"); //FUNCION para LEER
     text_decodificado=desencryptProgram(seed,method,codificado2);
-    funcEscribir("decodificado_prueba3.txt",text_decodificado);
+    funcEscribir("decodificado_prueba2.txt",text_decodificado);
 
     //VERIFICACION
-    strComparate(texto,text_decodificado);
+    strComparate(texto_original,text_decodificado);
 
     return 0;
 }

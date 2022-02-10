@@ -1,7 +1,7 @@
 #include "functions.h"
 
 string funcLeer(string nombre){
-    string linea,texto,binario;
+    string linea,texto;
     ifstream archivoLectura;
 
     archivoLectura.open(nombre); //Abrir el archivo en modo lectura
@@ -17,7 +17,6 @@ string funcLeer(string nombre){
         //cout<<linea<<endl;//CONTROL
     }
     //cout<<texto<<endl;
-    //binario += text2bin(texto);//funcion que convierte el texto a binario
     archivoLectura.close();
     return texto;
 }
@@ -43,8 +42,8 @@ string text2bin(string texto){//convierte el texto a binario
     for (unsigned long int i=0;i < texto.size();i++) {//cadena.size: retorna el tamaño de la cadena
         n=int(texto[i]);//Casteo de variable string a entero
 
-        cout<<texto[i]<<endl;//CONTROL
-        cout<<n<<endl;//CONTROL
+        //cout<<texto[i]<<endl;//CONTROL
+        //cout<<n<<endl;//CONTROL
 
         eightBits="";
         for(int i=1;i<=8;i++) {
@@ -52,7 +51,7 @@ string text2bin(string texto){//convierte el texto a binario
             else eightBits+= '1';
             n /= 2;
         }
-        cout<<strInverter(eightBits)<<endl;//CONTROL
+        //cout<<strInverter(eightBits)<<endl;//CONTROL
         bin += strInverter(eightBits);//FUNCION que invierte la cadena
     }
     cout<<bin<<endl;
@@ -86,7 +85,7 @@ string codecMethod1(string particion, string aux){//Esta funcion aplica las 3 re
     }
 
     if (count == aux.size()/2 && aux.size()%2 == 0){//Caso 1 '0s'=='1s' (restriccion de impares)
-        cout<<" caso 1"<<endl;//CONTROL
+        //cout<<" caso 1"<<endl;//CONTROL
         for (unsigned long int i=0;i<particion.size();i++) {
             if(particion[i]=='0') codificado += '1'; //se invierte el bit
             else codificado += '0';
@@ -94,7 +93,7 @@ string codecMethod1(string particion, string aux){//Esta funcion aplica las 3 re
     }
 
     else if(count < aux.size()/2){//Caso 2 '0s'>'1s'
-        cout<<" caso 2"<<endl;//CONTROL
+        //cout<<" caso 2"<<endl;//CONTROL
         for (unsigned long int i=0,k=0;i<particion.size();i++) {
             if(2*(k+1)-1==i){       //si es multiplo de 2 (considerando que se indexa desde cero)
                 if(particion[i]=='0') codificado += '1'; //se invierte el bit
@@ -105,7 +104,7 @@ string codecMethod1(string particion, string aux){//Esta funcion aplica las 3 re
         }
     }
     else{//Caso 3 '0s'<'1s'
-        cout<<" caso 3"<<endl;//CONTROL
+        //cout<<" caso 3"<<endl;//CONTROL
         for (unsigned long int i=0,k=0;i<particion.size();i++) {
             if(3*(k+1)-1==i){       //si es multiplo de 3 (considerando que se indexa desde cero)
                 if(particion[i]=='0') codificado += '1'; //se invierte el bit
@@ -116,7 +115,7 @@ string codecMethod1(string particion, string aux){//Esta funcion aplica las 3 re
         }
     }
 
-    cout<<" codificado: "<<codificado<<endl; //CONTROL
+    //cout<<" codificado: "<<codificado<<endl; //CONTROL
     return codificado;
 }
 
@@ -127,34 +126,33 @@ string codecMethod2(string particion)//Segundo metodo de codificacion
     for (unsigned long int i=0;i<particion.size()-1;i++) {//Guardo a partir de ahí en orden
         codificado += particion[i];
     }
-    cout<<" codificado: "<<codificado<<endl; //CONTROL
+    //cout<<" codificado: "<<codificado<<endl; //CONTROL
     return codificado;
 }
 
 string decodecMethod2(string particion)//Segundo metodo de DEcodificacion
-{   string codificado;
+{   string decodificado;
 
     for (unsigned long int i=1;i<particion.size();i++) {//Guardo a partir del segundo bit en orden
-        codificado += particion[i];
+        decodificado += particion[i];
     }
-    codificado += particion[0];//Guardo el primer bit del arreglo original
-    cout<<" codificado: "<<codificado<<endl; //CONTROL
-    return codificado;
+    decodificado += particion[0];//Guardo el primer bit del arreglo original
+    //cout<<" codificado: "<<decodificado<<endl; //CONTROL
+    return decodificado;
 }
-
 
 void strComparate(string texto1, string texto2)//Compara dos cadenas de strings
 {
     if(texto1.size()==texto2.size()){
         for (unsigned long int i=0;i<texto1.size();i++) {
             if(texto1[i]!=texto2[i]) {
-                cout<<"Las cadenas no coinciden"<<endl;
+                cout<<"Las cadenas no coinciden: ERROR DE ENCRIPTACION"<<endl;
                 break;
             }
+            else if(i==texto1.size()-1) cout<<"Las cadenas cocinciden: ENCRIPTACION EXITOSA"<<endl;
         }
-        cout<<"Las cadenas cocinciden"<<endl;
     }
-    else cout<<"Las cadenas no coinciden"<<endl;
+    else cout<<"Las cadenas no coinciden: ERROR DE ENCRIPTACION"<<endl;
 
 }
 
@@ -165,14 +163,14 @@ string bin2text(string binario)//convierte binario a texto
     for (unsigned long int i=0,k=0;i<binario.size();i++) {
         eightBits += binario[i];
         if(8*(k+1)-1==i){       //Particiones de 8 bits
-            cout<<eightBits<<endl;//CONTROL
+            //cout<<eightBits<<endl;//CONTROL
 
             for (int i=7;i>=0;i--) {//Recorre los 8 bits para convertirlo a decimal y luego a caracter
                 if(eightBits[i]=='1'){
                     num += potencia(2,7-i);
                 }
             }
-            cout<<num<<": "<<char(num)<<endl; //CONTROL
+            //cout<<num<<": "<<char(num)<<endl; //CONTROL
             texto += char(num);
             num=0;
             eightBits.clear();
@@ -180,7 +178,7 @@ string bin2text(string binario)//convierte binario a texto
         }
 
     }
-    cout<<texto<<endl; //CONTROL
+    //cout<<texto<<endl; //CONTROL
     return texto;
 }
 
