@@ -4,7 +4,7 @@ string encryptProgram(unsigned int seed,int method, string texto){
     string binario, codificado, particion, aux;
 
     binario += text2bin(texto);//FUNCION que convierte el texto a binario
-    cout<<"Longitud de binario: "<<binario.size()<<endl;//CONTROL
+//    cout<<"Longitud de binario: "<<binario.size()<<endl;//CONTROL
 
     //En caso de que el numero de bits no sea multiplo de la semilla, se debe rellenar con '0s' tamaño'= tamaño + tamaño%semilla)
     if (binario.size()%seed != 0) {
@@ -13,7 +13,7 @@ string encryptProgram(unsigned int seed,int method, string texto){
         }
     }
 
-    cout<<"Longitud de binario fixed: "<<binario.size()<<endl;//CONTROL
+    //cout<<"Longitud de binario fixed: "<<binario.size()<<endl;//CONTROL
 
     switch (method) {
 
@@ -38,8 +38,8 @@ string encryptProgram(unsigned int seed,int method, string texto){
             }
 
         }
-        cout<<"Codificion FINAL: "<<codificado<<endl;//CONTROL
-        cout<<"Longitud: "<<codificado.size()<<endl;//CONTROL
+//        cout<<"Codificion FINAL: "<<codificado<<endl;//CONTROL
+//        cout<<"Longitud: "<<codificado.size()<<endl;//CONTROL
         break;
     }
 

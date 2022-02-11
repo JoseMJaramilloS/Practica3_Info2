@@ -30,8 +30,8 @@ string desencryptProgram(unsigned int seed,int method, string binario){
             }
 
         }
-        cout<<"Decodificion FINAL: "<<decoBinario<<endl;//CONTROL
-        cout<<"Longitud: "<<decoBinario.size()<<endl;//CONTROL
+//        cout<<"Decodificion FINAL: "<<decoBinario<<endl;//CONTROL
+//        cout<<"Longitud: "<<decoBinario.size()<<endl;//CONTROL
         break;
     }
 
@@ -57,7 +57,7 @@ string desencryptProgram(unsigned int seed,int method, string binario){
     //Por lo que es necesario eliminarlos
 
     decoBinario.erase(decoBinario.size()-decoBinario.size()%8,decoBinario.size()-1);
-    cout<<"Longitud fixed: "<<decoBinario.size()<<endl;//CONTROL
+    //cout<<"Longitud fixed: "<<decoBinario.size()<<endl;//CONTROL
 
     texto =bin2text(decoBinario);
 

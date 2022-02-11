@@ -15,7 +15,7 @@ string funcLeer(string nombre){
         getline(archivoLectura,linea,'\n');
         texto += linea+'\n';
         //cout<<linea<<endl;//CONTROL
-    }
+    }   
     //cout<<texto<<endl;
     archivoLectura.close();
     return texto;
@@ -26,6 +26,21 @@ void funcEscribir(string nombre, string texto)//Funcion que escribe "texto", en 
     ofstream archivoEscritura;
 
     archivoEscritura.open(nombre); //Abrir el archivo en modo lectura
+
+    if(archivoEscritura.fail()){//Hay error al abrir el archivo
+        cout<<"No se pudo abrir el archivo. Error de escritura."<<endl;
+        exit(-1); //Finalizar la ejecucion del programa
+    }
+    //archivoEscritura.seekp(0);
+    archivoEscritura<<texto;
+    archivoEscritura.close();
+}
+
+void funcEscribirFIX(string nombre, string texto)//Funcion que escribe "texto", en un archivo con "nombre"
+{
+    ofstream archivoEscritura;
+
+    archivoEscritura.open(nombre,ios::app); //Abrir el archivo en modo lectura
 
     if(archivoEscritura.fail()){//Hay error al abrir el archivo
         cout<<"No se pudo abrir el archivo. Error de escritura."<<endl;
@@ -54,7 +69,7 @@ string text2bin(string texto){//convierte el texto a binario
         //cout<<strInverter(eightBits)<<endl;//CONTROL
         bin += strInverter(eightBits);//FUNCION que invierte la cadena
     }
-    cout<<bin<<endl;
+    //cout<<bin<<endl;
     return bin;
 }
 
@@ -189,4 +204,27 @@ int potencia(int base, int exp)//realiza la operacion de potencia base^exp
         result *=base;
     }
     return result;
+}
+
+void usersInfo(string users,size_t posicion, string *cedula,string *pass,string *saldo)
+{
+    *cedula="";*pass="";*saldo="";
+
+    for (unsigned long long int i=posicion,k=0;k!=3;i++) {
+
+        if(users[i]==',' || users[i]=='\n'){
+            k++;
+        }
+        else if(k==0){
+            *cedula+=users[i];
+        }
+        else if(k==1){
+            *pass+=users[i];
+        }
+        else if(k==2){
+            *saldo+=users[i];
+        }
+
+    }
+
 }
