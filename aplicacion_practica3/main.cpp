@@ -17,7 +17,7 @@ int main()
         cout<<"\nDigite una opcion: "; cin>>select;
 
         switch (select) {
-        case 1:
+        case 1://==============================MENU ADMINISTRADOR===================================
             cout<<"Contrasenia de administrador: ";
             fflush(stdin);
             getline(cin,password);
@@ -36,7 +36,7 @@ int main()
                     cout<<"\nDigite una opcion: "; cin>>select;
                     switch (select) {
 
-                    case 1://==============================MENU ADMINISTRADOR===================================
+                    case 1:
 //                        aux=encryptProgram(3,2,funcLeer("users_ini.txt"));//Inicializacion de la base de datos
 //                        funcEscribir("users_test.txt",aux);
                         cout<<"\n\tLista de usuarios"<<endl;
@@ -63,7 +63,10 @@ int main()
                     case 3:
                         menu_admin=false;
                         cout<<"CERRANDO SESION"<<endl;
-                        cout<<"Devuelta al menu principal"<<endl;
+                        cout<<"Devuelta al MENU PRINCIPAL"<<endl;
+                        cout<<"(1) Ingresar como administrador"<<endl;
+                        cout<<"(2) Ingresar como usuario"<<endl;
+                        cout<<"(3) Salir"<<endl;
                         break;
 
                     default:
@@ -136,7 +139,10 @@ int main()
                         case 3:
                             menu_user=false;
                             cout<<"CERRANDO SESION"<<endl;
-                            cout<<"Devuelta al menu principal"<<endl;
+                            cout<<"Devuelta al MENU PRINCIPAL"<<endl;
+                            cout<<"(1) Ingresar como administrador"<<endl;
+                            cout<<"(2) Ingresar como usuario"<<endl;
+                            cout<<"(3) Salir"<<endl;
                             break;
 
                         default:

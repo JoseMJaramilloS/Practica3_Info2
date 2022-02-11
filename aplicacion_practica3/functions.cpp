@@ -206,7 +206,7 @@ int potencia(int base, int exp)//realiza la operacion de potencia base^exp
     return result;
 }
 
-void usersInfo(string users,size_t posicion, string *cedula,string *pass,string *saldo)
+void usersInfo(string users,size_t posicion, string *cedula,string *pass,string *saldo)//extrae la informacion de cada usuario
 {
     *cedula="";*pass="";*saldo="";
 
