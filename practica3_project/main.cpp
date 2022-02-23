@@ -54,7 +54,7 @@ int main()
             fflush(stdin);
             getline(cin,name);
             funcEscribir(name,text_decodificado); //FUNCION para ESCRIBIR
-            cout<<"Archivo desencripado guardado correctamente como "<<name<<endl;
+            cout<<"Archivo desencriptado guardado correctamente como "<<name<<endl;
             break;
         case 3:
             main_menu=false;
